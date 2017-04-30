@@ -9,7 +9,7 @@ function getData(loc, callback) {
         dataSelector.push('pm25');
         dataValid = true;
     }
-    if (document.getElementById('pm1-c').checked) {
+    if (document.getElementById('pm10-c').checked) {
         dataSelector.push('pm1');
         dataValid = true;
     }
@@ -32,6 +32,11 @@ function getData(loc, callback) {
     if (document.getElementById('bc-c').checked) {
         dataSelector.push('bc');
         dataValid = true;
+    }
+    
+    if (!dataValid) {
+        // No data to load
+        return;
     }
 
     xml.onreadystatechange = function() {
