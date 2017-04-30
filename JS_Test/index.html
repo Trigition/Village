@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>Village</title>
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <style>
+            #map {
+                width: 1024px;
+                height: 500px;
+            }
+        </style>
+    </head>
+    <div class="container site-wrapper">
+        <body>
+            <div class="header clearfix">
+                <h2 class="text-muted text-center">This is a header</h2>
+            </div>
+            
+            <div class="jumbotron">
+                <h1 class="text-center">Village App</h1>
+                <p class="lead text-center" id="icon-area">Gotta make that app</p>
+                <div class="row" id="control-panel">
+                    
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-12" id='test'>
+                </div>
+                <script src="data_get.js"></script>
+            </div>
+            <div class="row">
+                <div class="col-lg-12" id="map"></div>
+                <script>
+                    var map;
+                    function getLoc() {
+                        navigator.geolocation.getCurrentPosition(initGoogleMap);
+                    }
+
+                    function initGoogleMap(loc) {
+                        var latitude = loc.coords.latitude;
+                        var longitude = loc.coords.longitude;
+                        map = new google.maps.Map(document.getElementById('map'), {
+                            center : {lat : latitude , lng : longitude},
+                            zoom : 12
+                        });
+                        var marker = new google.maps.Marker({
+                            position : {lat : latitude, lng : longitude},
+                            map : map
+                        });
+                        openAQ_Locations(latitude, longitude, getLocations);
+                    };
+                </script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-N9nrH5bdz9bslkrllglQYf8j_6pX2aM&callback=getLoc" async defer></script>
+            </div>
+            
+        </body>
+    </div>
+</html>
